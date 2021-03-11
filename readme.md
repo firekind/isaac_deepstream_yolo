@@ -36,4 +36,4 @@ Attach a V4L2 compatible camera and note its device id. Edit the `device_id` und
 
 and open `localhost:3000` on the browser to see the results.
 
-> Note: By default, the graph uses yoloV3 tiny. To use yoloV3, edit the `config-file-path` of the `nvinfer` element in [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L82) to `apps/isaac_deepstream_yolo/configs/yolov3-config.txt`
+> Note: By default, the graph uses yoloV3 tiny. To use yoloV3, edit the `config-file-path` property of the `nvinfer` element in [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L82) to `apps/isaac_deepstream_yolo/configs/yolov3-config.txt`
