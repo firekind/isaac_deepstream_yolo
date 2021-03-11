@@ -5,8 +5,10 @@ isaac_app(
     app_json_file = "graphs/detector.app.json",
     data = glob([
         "configs/*",
-        "models/*",
-    ]),
+        "models/**",
+    ]) + [
+        "lib/libnvdsinfer_custom_impl_Yolo.so"
+    ],
     modules = [
         "deepstream",
         "sight",
