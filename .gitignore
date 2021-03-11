@@ -1,0 +1,4 @@
+*.engine
+*.pyc
+.vscode/
+__pycache__/

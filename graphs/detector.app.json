@@ -1,0 +1,97 @@
+{
+    "name": "detector",
+    "modules": [
+        "deepstream",
+        "sight",
+        "viewers",
+        "sensors:v4l2_camera"
+    ],
+    "graph": {
+        "nodes": [
+            {
+                "name": "camera",
+                "components": [
+                    {
+                        "name": "ledger",
+                        "type": "isaac::alice::MessageLedger"
+                    },
+                    {
+                        "name": "v4l2",
+                        "type": "isaac::V4L2Camera"
+                    }
+                ]
+            },
+            {
+                "name": "deepstream",
+                "components": [
+                    {
+                        "name": "ledger",
+                        "type": "isaac::alice::MessageLedger"
+                    },
+                    {
+                        "name": "pipeline",
+                        "type": "isaac::deepstream::Pipeline"
+                    }
+                ]
+            },
+            {
+                "name": "result_viewer",
+                "components": [
+                    {
+                        "name": "ledger",
+                        "type": "isaac::alice::MessageLedger"
+                    },
+                    {
+                        "name": "viewer",
+                        "type": "isaac::viewers::ImageViewer"
+                    }
+                ]
+            },
+            {
+                "name": "sight_widget",
+                "components": [
+                    {
+                        "name": "viewer",
+                        "type": "isaac::sight::SightWidget"
+                    }
+                ]
+            }
+        ],
+        "edges": [
+            {
+                "source": "camera/v4l2/frame",
+                "target": "deepstream/pipeline/input"
+            },
+            {
+                "source": "deepstream/pipeline/output",
+                "target": "result_viewer/viewer/image"
+            }
+        ]
+    },
+    "config": {
+        "camera": {
+            "v4l2": {
+                "device_id": 2,
+                "rows": 480,
+                "cols": 640,
+                "rate_hz": 30
+            }
+        },
+        "deepstream": {
+            "pipeline": {
+                "pipeline": "appsrc name=input ! video/x-raw,format=RGB,framerate=30/1,width=640,height=480 ! videoconvert ! video/x-raw,format=RGBA ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw(memory:NVMM) ! mux.sink_0 nvstreammux name=mux width=640 height=480 batch-size=1 batched-push-timeout=4000000 nvbuf-memory-type=0 ! nvinfer config-file-path=apps/isaac_deepstream_yolo/configs/resnet10-config.txt nvbuf-memory-type=0 ! nvvideoconvert nvbuf-memory-type=0 ! nvdsosd nvbuf-memory-type=0 ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw,format=RGBA ! videoconvert ! video/x-raw,format=RGB ! appsink name=output"
+            }
+        },
+        "sight_widget": {
+            "viewer": {
+                "title": "result",
+                "type": "2d",
+                "channels": [
+                    {
+                        "name": "result_viewer/viewer/image"
+                    }
+                ]
+            }
+        }
+    }
+}
