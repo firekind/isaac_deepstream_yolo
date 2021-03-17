@@ -2,36 +2,32 @@
 
 As it says on the tin.
 
-## Dependencies
-
-Make sure you have Nvidia Isaac version 2020.2 and Deepstream version 5.1 installed.
-
 ## Run
 
-Clone the repo into the `sdk/apps` directory
+Make sure you have docker and nvidia-docker installed. Start a docker container using
 
 ```
-isaac/sdk/apps$ git clone https://github.com/firekind/isaac_deepstream_yolo
+$ docker run --mount source=isaac-sdk-build-cache,target=/root -v <path to project directory>:/workspace -w /workspace --gpus=all --device <path to camera, if used. eg: /dev/video2> --net=host -it firekind/isaac:2020.2-deepstream-5.0.1-devel /bin/bash
 ```
 
 then, download the models.
 
 ```
-$ ./download-models.sh
+/workspace$ ./download-models.sh
 ```
 
 This will download the models into the `models/yolo` directory. Then, compile the custom deepstream yolo plugin.
 
 ```
 $ cd lib
-$ export CUDA_VER=<cuda version>
+$ export CUDA_VER=10.2
 $ make
 ```
 
 Attach a V4L2 compatible camera and note its device id. Edit the `device_id` under the `config` section of [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
 
 ```
-~/isaac/sdk$ bazel run //apps/isaac_deepstream_yolo:detector
+$ bazel run //apps:detector
 ```
 
 and open `localhost:3000` on the browser to see the results.

@@ -1,0 +1,20 @@
+{
+    "name": "yolo-deepstream-isaac",
+    "image": "firekind/isaac:2020.2-deepstream-5.0.1-devel",
+    "runArgs": [
+        "--gpus=all",
+        "--device=/dev/video2",
+        "--net=host",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+    ],
+    "mounts": [
+        "source=isaac-sdk-build-cache,target=/root",
+    ],
+    "containerEnv": {
+        "DISPLAY": "${env:DISPLAY}"
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+    ]
+}

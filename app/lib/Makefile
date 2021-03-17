@@ -28,7 +28,7 @@ CC:= g++
 NVCC:=/usr/local/cuda-$(CUDA_VER)/bin/nvcc
 
 CFLAGS:= -Wall -std=c++11 -shared -fPIC -Wno-error=deprecated-declarations
-CFLAGS+= -I/opt/nvidia//deepstream/deepstream-5.1/sources/includes -I/usr/local/cuda-$(CUDA_VER)/include
+CFLAGS+= -I/opt/nvidia/deepstream/deepstream-5.0/sources/includes -I/usr/local/cuda-$(CUDA_VER)/include
 
 LIBS:= -lnvinfer_plugin -lnvinfer -lnvparsers -L/usr/local/cuda-$(CUDA_VER)/lib64 -lcudart -lcublas -lstdc++fs
 LFLAGS:= -shared -Wl,--start-group $(LIBS) -Wl,--end-group
