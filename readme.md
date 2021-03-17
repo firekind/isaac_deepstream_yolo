@@ -23,7 +23,7 @@ $ cd lib
 $ export CUDA_VER=10.2
 $ make
 ```
-Edit the `device_id` under the `config` section of [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
+Edit the `device_id` under the `config` section of [`app/graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/app/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
 
 ```
 $ bazel run //apps:detector
@@ -31,4 +31,4 @@ $ bazel run //apps:detector
 
 and open `localhost:3000` on the browser to see the results.
 
-> Note: By default, the graph uses yoloV3 tiny. To use yoloV3, edit the `config-file-path` property of the `nvinfer` element in [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L82) to `apps/isaac_deepstream_yolo/configs/yolov3-config.txt`
+> Note: By default, the graph uses yoloV3 tiny. To use yoloV3, edit the `config-file-path` property of the `nvinfer` element in [`app/graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/app/graphs/detector.app.json#L82) to `app/configs/yolov3-config.txt`
