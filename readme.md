@@ -7,7 +7,7 @@ As it says on the tin.
 Make sure you have docker and nvidia-docker installed. Start a docker container using
 
 ```
-$ docker run --mount source=isaac-sdk-build-cache,target=/root -v <path to project directory>:/workspace -w /workspace --gpus=all --device <path to camera, if used. eg: /dev/video2> --net=host -it firekind/isaac:2020.2-deepstream-5.0.1-devel /bin/bash
+$ docker run --mount source=isaac-sdk-build-cache,target=/root -v <path to project directory>:/workspace -w /workspace --gpus=all --device <path to camera eg: /dev/video2> --net=host -it firekind/isaac:2020.2-deepstream-5.0.1-devel /bin/bash
 ```
 
 then, download the models.
