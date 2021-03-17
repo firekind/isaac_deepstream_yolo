@@ -4,7 +4,7 @@ As it says on the tin.
 
 ## Run
 
-Make sure you have docker and nvidia-docker installed. Start a docker container using
+Make sure you have docker and nvidia-docker installed and attach a V4L2 compatible camera and note its device id. Start a docker container using
 
 ```
 $ docker run --mount source=isaac-sdk-build-cache,target=/root -v <path to project directory>:/workspace -w /workspace --gpus=all --device <path to camera eg: /dev/video2> --net=host -it firekind/isaac:2020.2-deepstream-5.0.1-devel /bin/bash
@@ -23,8 +23,7 @@ $ cd lib
 $ export CUDA_VER=10.2
 $ make
 ```
-
-Attach a V4L2 compatible camera and note its device id. Edit the `device_id` under the `config` section of [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
+Edit the `device_id` under the `config` section of [`graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
 
 ```
 $ bazel run //apps:detector
