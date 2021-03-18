@@ -79,7 +79,7 @@
         },
         "deepstream": {
             "pipeline": {
-                "pipeline": "appsrc name=input ! video/x-raw,format=RGB,framerate=30/1,width=640,height=480 ! videoconvert ! video/x-raw,format=RGBA ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw(memory:NVMM) ! mux.sink_0 nvstreammux name=mux width=640 height=480 batch-size=1 batched-push-timeout=4000000 nvbuf-memory-type=0 ! nvinfer config-file-path=app/configs/yolov3-tiny-config.txt nvbuf-memory-type=0 ! nvvideoconvert nvbuf-memory-type=0 ! nvdsosd nvbuf-memory-type=0 ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw,format=RGBA ! videoconvert ! video/x-raw,format=RGB ! appsink name=output"
+                "pipeline": "appsrc name=input ! video/x-raw,format=RGB,framerate=30/1,width=640,height=480 ! videoconvert ! video/x-raw,format=RGBA ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw(memory:NVMM) ! mux.sink_0 nvstreammux name=mux width=640 height=480 batch-size=1 batched-push-timeout=4000000 nvbuf-memory-type=0 ! nvinfer config-file-path=app/configs/yolov3-tiny-config.txt ! nvdsosd ! nvvideoconvert nvbuf-memory-type=0 ! video/x-raw,format=RGBA ! videoconvert ! video/x-raw,format=RGB ! appsink name=output"
             }
         },
         "sight_widget": {
