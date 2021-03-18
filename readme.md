@@ -23,7 +23,7 @@ $ cd lib
 $ export CUDA_VER=10.2
 $ make
 ```
-Edit the `device_id` under the `config` section of [`app/graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/app/graphs/detector.app.json#L74) file. Then, in the `sdk` directory, run:
+Edit the `device_id` under the `config` section of [`app/graphs/detector.app.json`](https://github.com/firekind/isaac_deepstream_yolo/blob/master/app/graphs/detector.app.json#L74) file to the device id of your setup. Then, run:
 
 ```
 $ bazel run //apps:detector
